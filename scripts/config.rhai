@@ -11,7 +11,7 @@ let authors_array = [
     "Ken Goldenberg", "Deepak Pathek", "Sergey Levine", "Cewu Lu"];
 
 let conferences = [
-    "AAAI", "CORL", "RAS",
+    "AAAI", "CORL", "RAS", "CoRL",
     "RA-L", "RAL", "IJRR", "ICRA", "IJCAI", "IROS",
     "UAI", "RSS", "TRO",
     "CVPR", "ECCV", "ICCV", "Transactions on Robotics",
