@@ -14,7 +14,7 @@ let conferences = [
     "AAAI", "AAMAS", "ACM MM", "CORL", "RAS",
     "RA-L", "RAL", "IJRR", "ICRA", "IJCAI", "IROS",
     "UAI", "PPSN",  "RSS", "TRO",
-    ""CVPR", "ECCV", "ICCV", "Transactions on Robotics",
+    "CVPR", "ECCV", "ICCV", "Transactions on Robotics",
     "International Journal of Robotics Research", "Robotics and Automation Letters", "ICLR", "ICML",
     "NeurIPS", "NIPS", "COLT"]
 
