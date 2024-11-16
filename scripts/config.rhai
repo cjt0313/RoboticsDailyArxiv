@@ -3,15 +3,20 @@ let titles_model = ["manipulation", "locomotion", "Task Planning", "Motion Plann
 let titles_method = ["bayesian", "task", "manipulation", "Navigation", "Decision", "Reinforcement", "dynamic", "sparsification", "robot", "Guassian", "robust", "differentiable", "simulation", "simulator", "dataset", "Deformable", 
 "geometric", "benchmark", "evaluation", "prediction", "non prehensile", "grasp", "3DGS", "POMDP", "MDP", "trajectory", "trajectories", "GPT", "LLM", "embodied", "VLM"];
 let titles =  titles_model + titles_method + titles_type;
-let authors_array = ["Yuke Zhu", "Leslie Kaelbling", "Panpan CAI", "David Hsu", "Wolfram Burgard", "Yunzhu Li", "Ken Goldberg", "Guanya Shi", "Marco Pavone", "Chelsea Finn",
-"Shuran Song", "Danfei Xu", "Marco Hutter", "Xiaolong Wang", "Li Fei-Fei", "Pieter Abbeel", "Ken Goldenberg", "Deepak Pathek", "Sergey Levine", "Cewu Lu"];
+let authors_array = [
+    "Yuke Zhu", "Leslie Kaelbling", "Panpan CAI", "David Hsu",
+    "Wolfram Burgard", "Yunzhu Li", "Ken Goldberg", "Guanya Shi",
+    "Marco Pavone", "Chelsea Finn", "Shuran Song", "Danfei Xu",
+    "Marco Hutter", "Xiaolong Wang", "Li Fei-Fei", "Pieter Abbeel",
+    "Ken Goldenberg", "Deepak Pathek", "Sergey Levine", "Cewu Lu"];
 
 let conferences = [
-    // AI
-    "AAAI", "AAMAS", "ACM MM", "CORL", "RAS", "RA-L", "RAL", "IJRR", "ICRA", "IJCAI", "IROS", "UAI", "PPSN",  "RSS", "TRO",
-    // CV
-    ""CVPR", "ECCV", "ICCV", "Transactions on Robotics", "International Journal of Robotics Research", "Robotics and Automation Letters", "ICLR", "ICML", "NeurIPS", "NIPS",
-    "COLT"]
+    "AAAI", "AAMAS", "ACM MM", "CORL", "RAS",
+    "RA-L", "RAL", "IJRR", "ICRA", "IJCAI", "IROS",
+    "UAI", "PPSN",  "RSS", "TRO",
+    ""CVPR", "ECCV", "ICCV", "Transactions on Robotics",
+    "International Journal of Robotics Research", "Robotics and Automation Letters", "ICLR", "ICML",
+    "NeurIPS", "NIPS", "COLT"]
 
 let start = conferences.shift();
 let conferences_rg = conferences.reduce(|sum, v| sum + "|" + v, start);
