@@ -1,4 +1,4 @@
-site_title = "MyArxiv"
+site_title = "RoboticsDailyArxiv"
 limit_days = 7
 cache_url = "https://jtcai.github.io/RoboticsDailyArxiv/cache.json"
 
