@@ -16,7 +16,7 @@ let conferences = [
     "UAI", "RSS", "TRO",
     "CVPR", "ECCV", "ICCV", "Transactions on Robotics",
     "International Journal of Robotics Research", "Robotics and Automation Letters", "ICLR", "ICML",
-    "NeurIPS", "NIPS", "COLT"]
+    "NeurIPS", "NIPS", "COLT"];
 
 let start = conferences.shift();
 let conferences_rg = conferences.reduce(|sum, v| sum + "|" + v, start);
