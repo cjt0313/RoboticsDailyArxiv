@@ -1,6 +1,6 @@
 let titles_type = ["Dataset", "Survey", "Review", "Overview"];
 let titles_model = ["manipulation", "locomotion", "Task Planning", "Motion Planning", "Long-term", "Planning", "Optimization", "Estimation", "Control", "quadruped", "legged robot"];
-let titles_method = ["bayesian", "task", "manipulation", "Navigation", "Decision", "Reinforcement", "dynamic", "sparsification", "robot", "Guassian", "robust", "differentiable", "simulation", "simulator", "dataset", "Deformable", 
+let titles_method = ["bayesian", "task", "manipulation", "Navigation", "Decision", "Reinforcement", "dynamic", "sparsification", "Guassian", "differentiable", "simulation", "simulator", "dataset", "Deformable", 
 "geometric", "benchmark", "evaluation", "prediction", "non prehensile", "grasp", "3DGS", "POMDP", "MDP", "trajectory", "trajectories", "GPT", "LLM", "embodied", "VLM"];
 let titles =  titles_model + titles_method + titles_type;
 let authors_array = [
