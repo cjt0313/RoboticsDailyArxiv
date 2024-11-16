@@ -1,29 +1,17 @@
 let titles_type = ["Dataset", "Survey", "Review", "Overview"];
-let titles_model = ["BERT", "GPT", "Transformer"];
-let titles_method = ["Pre-train", "Pretrain", "Prompt", "Self-Supervised"];
+let titles_model = ["manipulation", "locomotion", "Task Planning", "Motion Planning", "Long-term", "Planning", "Optimization", "Estimation", "Control", "quadruped", "legged robot"];
+let titles_method = ["bayesian", "task", "manipulation", "Navigation", "Decision", "Reinforcement", "dynamic", "sparsification", "robot", "Guassian", "robust", "differentiable", "simulation", "simulator", "dataset", "Deformable", 
+"geometric", "benchmark", "evaluation", "prediction", "non prehensile", "grasp", "3DGS", "POMDP", "MDP", "trajectory", "trajectories", "GPT", "LLM", "embodied", "VLM"];
 let titles =  titles_model + titles_method + titles_type;
-let authors_array = ["Yann LeCun", "Geoffrey Hinton", "Yoshua Bengio"];
+let authors_array = ["Yuke Zhu", "Leslie Kaelbling", "Panpan CAI", "David Hsu", "Wolfram Burgard", "Yunzhu Li", "Ken Goldberg", "Guanya Shi", "Marco Pavone", "Chelsea Finn",
+"Shuran Song", "Danfei Xu", "Marco Hutter", "Xiaolong Wang", "Li Fei-Fei", "Pieter Abbeel", "Ken Goldenberg", "Deepak Pathek", "Sergey Levine", "Cewu Lu"];
 
 let conferences = [
     // AI
-    "AAAI", "AAMAS", "ACM MM", "AISTATS", "ALT", "CEC", "ECAI", "FUZZ IEEE", "GECCO", "ICANN", "ICAPS", "ICCBR", "ICONIP", "ICRA", "ICTAI", "IJCAI", "IJCNN", "IROS", "KR", "KSEM", "SIGGRAPH", "STOC", "UAI", "PPSN", "PRICAI", "TAAI",
+    "AAAI", "AAMAS", "ACM MM", "CORL", "RAS", "RA-L", "RAL", "IJRR", "ICRA", "IJCAI", "IROS", "UAI", "PPSN",  "RSS", "TRO",
     // CV
-    "3DV", "ACCV", "ACM MM", "BMVC", "CVPR", "ECCV", "ICCV", "ICDAR", "ICIP", "ICME", "ICPR", "IEEE VIS", "MICCAI", "SIGGRAPH", "WACV",
-    // DM
-    "AKBC", "APWeb", "CIKM", "DASFAA", "ECML-PKDD", "ICDE", "ICDM", "ICDT", "KDD", "LREC", "MDM", "PAKDD", "PODS", "RecSys", "SDM", "SIGMOD", "VLDB", "WSDM", "WWW", "EDBT", "CIDR",
-    // IR
-    "ECIR", "ESWC", "ICMR", "ICTIR", "ISWC", "SIGIR",
-    // ML
-    "ACML", "AISTATS", "ECML", "ICLR", "ICML", "ML4H", "NeurIPS", "NIPS", "UAI",
-    // NLP
-    "AACL", "ACL", "CCL", "COLING", "COLT", "CoNLL", "EACL", "EMNLP", "ICASSP", "ICDAR", "ICONIP", "INTERSPEECH", "LREC", "NAACL", "NLPCC", "RepL4NLP", "SIGDIAL", "SemEval", "WANLP", "WASSA", "WOAH",
-    // Arch
-    "ASPLOS", "ATC", "DATE", "EuroSys", "FAST", "HPCA", "ISCA", "MICRO", "PPoPP", "SC", "SoCC",
-    // System
-    "FSE/ESEC", "ICSE", "ISSTA", "OSDI", "SOSP",
-    // Security
-    "ACSA", "AsiaCCS", "CCS", "DSN", "ESORICS", "EuroS&P", "ICICS", "NDSS", "RAID", "SP", "USENIX Security"
-];
+    ""CVPR", "ECCV", "ICCV", "Transactions on Robotics", "International Journal of Robotics Research", "Robotics and Automation Letters", "ICLR", "ICML", "NeurIPS", "NIPS",
+    "COLT"]
 
 let start = conferences.shift();
 let conferences_rg = conferences.reduce(|sum, v| sum + "|" + v, start);
