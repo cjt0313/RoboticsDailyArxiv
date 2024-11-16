@@ -1,6 +1,6 @@
 site_title = "RoboticsDailyArxiv"
 limit_days = 7
-cache_url = "https://jtcai.github.io/RoboticsDailyArxiv/cache.json"
+cache_url = "https://cjt0313.github.io/jtcai.github.io/RoboticsDailyArxiv/cache.json"
 
 [[sources]]
 limit = 300
