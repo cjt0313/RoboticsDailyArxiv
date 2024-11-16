@@ -8,8 +8,9 @@ let authors_array = [
     "Wolfram Burgard", "Yunzhu Li", "Ken Goldberg", "Guanya Shi",
     "Marco Pavone", "Chelsea Finn", "Shuran Song", "Danfei Xu",
     "Marco Hutter", "Xiaolong Wang", "Li Fei-Fei", "Pieter Abbeel",
-    "Ken Goldenberg", "Deepak Pathek", "Sergey Levine", "Cewu Lu", 
-    "Shaojie Shen", "Tong Qin", "Hongyang Li", "Junchi Yan", "Karl Pertsch", "Boris Ivanovic", "Yuke Zhu"];
+    "Shaojie Shen", "Tong Qin", "Hongyang Li", "Junchi Yan", "Karl Pertsch", "Boris Ivanovic", "Yuke Zhu",
+    "Ken Goldenberg", "Deepak Pathek", "Sergey Levine", "Cewu Lu"];
+    
 
 let conferences = [
     "AAAI", "CORL", "RAS", "CoRL",
