@@ -3,22 +3,22 @@ limit_days = 30
 cache_url = "https://cjt0313.github.io/RoboticsDailyArxiv/cache.json"
 
 [[sources]]
-limit = 30
+limit = 150
 category = "cs.RO"
 title = "Robotics"
 
 [[sources]]
-limit = 30
+limit = 150
 category = "cs.CV"
 title = "Computer Vision and Pattern Recognition"
 
 [[sources]]
-limit = 30
+limit = 150
 category = "cs.AI"
 title = "Artificial Intelligence"
 
 [[sources]]
-limit = 30
+limit = 150
 category = "cs.LG"
 title = "Machine Learning"
 
