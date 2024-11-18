@@ -4,7 +4,7 @@ let titles_method = ["bayesian", "task", "manipulation", "Navigation", "Decision
 "geometric", "benchmark", "evaluation", "prediction", "non prehensile", "grasp", "3DGS", "POMDP", "MDP", "trajectory", "trajectories", "GPT", "LLM", "embodied", "VLM"];
 let titles =  titles_model + titles_method + titles_type;
 let authors_array = [
-    "Yuke Zhu", "Leslie Kaelbling", "Panpan CAI", "David Hsu",
+    "Yuke Zhu", "Leslie Pack Kaelbling", "Joshua Tenenbaum", "Tomás Lozano-Pérez", "Panpan CAI", "David Hsu",
     "Wolfram Burgard", "Yunzhu Li", "Ken Goldberg", "Guanya Shi",
     "Marco Pavone", "Chelsea Finn", "Shuran Song", "Danfei Xu",
     "Marco Hutter", "Xiaolong Wang", "Li Fei-Fei", "Pieter Abbeel",
