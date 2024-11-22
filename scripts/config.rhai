@@ -7,7 +7,7 @@ let authors_array = [
     "Yuke Zhu", "Leslie Pack Kaelbling", "Joshua Tenenbaum", "Tomás Lozano-Pérez", "Panpan CAI", "David Hsu",
     "Wolfram Burgard", "Yunzhu Li", "Ken Goldberg", "Guanya Shi",
     "Marco Pavone", "Chelsea Finn", "Shuran Song", "Danfei Xu",
-    "Marco Hutter", "Xiaolong Wang", "Li Fei-Fei", "Pieter Abbeel",
+    "Marco Hutter", "Xiaolong Wang", "Li Fei-Fei", "Pieter Abbeel", "Abdeslam Boularias",
     "Shaojie Shen", "Tong Qin", "Hongyang Li", "Junchi Yan", "Karl Pertsch", "Boris Ivanovic", "Yuke Zhu",
     "Ken Goldenberg", "Deepak Pathek", "Sergey Levine", "Cewu Lu"];
     
