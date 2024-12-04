@@ -6,7 +6,7 @@ let titles =  titles_model + titles_method + titles_type;
 let authors_array = [
     "Yuke Zhu", "Leslie Pack Kaelbling", "Joshua Tenenbaum", "Tomás Lozano-Pérez", "Panpan CAI", "David Hsu",
     "Wolfram Burgard", "Yunzhu Li", "Ken Goldberg", "Guanya Shi", "Lydia E Kavraki", "Zachary Kingston",
-    "Marco Pavone", "Chelsea Finn", "Shuran Song", "Danfei Xu",
+    "Marco Pavone", "Chelsea Finn", "Shuran Song", "Danfei Xu", "Siwei Chen", "Yiqing Xu", "Jiayuan Mao", "Yilun Du",
     "Marco Hutter", "Xiaolong Wang", "Li Fei-Fei", "Pieter Abbeel", "Abdeslam Boularias",
     "Shaojie Shen", "Tong Qin", "Hongyang Li", "Junchi Yan", "Karl Pertsch", "Boris Ivanovic",
     "Ken Goldenberg", "Deepak Pathek", "Sergey Levine", "Cewu Lu"];
