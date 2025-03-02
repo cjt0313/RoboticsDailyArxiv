@@ -1,7 +1,7 @@
 let titles_type = ["Dataset"];
-let titles_model = ["manipulation", "locomotion", "Task Planning", "Motion Planning", "Long-term", "Planning", "Optimization", "quadruped", "legged robot"];
+let titles_model = ["manipulation", "locomotion", "Task Planning", "Motion Planning", "Long-term", "Planning", "Optimization", "quadruped", "legged robot", "Mobile Manipulation"];
 let titles_method = ["physic", "task", "manipulation", "Decision", "Guassian", "differentiable", "simulation", "simulator", "dataset", "Deformable", 
-"geometric", "active", "non prehensile", "grasp", "POMDP", "MDP", "trajectory", "GPT", "LLM", "embodied", "VLM", "VLA"];
+"geometric", "active", "non prehensile", "grasp", "POMDP", "MDP", "trajectory", "GPT", "LLM", "embodied", "VLM", "VLA", "mobile"];
 let titles =  titles_model + titles_method + titles_type;
 let authors_array = [
     "Yuke Zhu", "Leslie Pack Kaelbling", "Joshua Tenenbaum", "Tomás Lozano-Pérez", "Panpan CAI", "David Hsu",
