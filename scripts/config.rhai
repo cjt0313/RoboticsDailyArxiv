@@ -5,6 +5,7 @@ let titles_method = ["physic", "task", "manipulation", "Decision", "Guassian", "
 let titles =  titles_model + titles_method + titles_type;
 let authors_array = [
     "Yuke Zhu", "Leslie Pack Kaelbling", "Joshua Tenenbaum", "Tomás Lozano-Pérez", "Panpan CAI", "David Hsu",
+    "Wenjing Tang", "Xinyu He", "Yongxi Huang", "Yunxiao Xiao",
     "Wolfram Burgard", "Yunzhu Li", "Ken Goldberg", "Guanya Shi", "Lydia E Kavraki", "Zachary Kingston",
     "Marco Pavone", "Chelsea Finn", "Shuran Song", "Danfei Xu", "Siwei Chen", "Yiqing Xu", "Jiayuan Mao", "Yilun Du",
     "Marco Hutter", "Xiaolong Wang", "Li Fei-Fei", "Pieter Abbeel", "Abdeslam Boularias",
