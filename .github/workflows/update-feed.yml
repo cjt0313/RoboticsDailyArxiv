@@ -30,6 +30,19 @@ jobs:
           cd ArxivFeed
           sed -i 's|http://export.arxiv.org|https://export.arxiv.org|g' src/core/query.rs
           sed -i 's|let date = arxiv.updated;|let date = arxiv.updated.date_naive().and_hms_opt(0, 0, 0).unwrap().and_utc();|g' src/main.rs
+          # Normalize cached timestamps to dates after loading
+          sed -i '/let mut raw_data: ArxivCollection = from_cache/a\
+              let mut normalized: ArxivCollection = Default::default();\
+              for (timestamp, categories) in raw_data {\
+                  let date = timestamp.date_naive().and_hms_opt(0, 0, 0).unwrap().and_utc();\
+                  for (cat_name, papers) in categories {\
+                      let cat_entry = normalized.entry(date).or_default().entry(cat_name).or_default();\
+                      for paper in papers {\
+                          cat_entry.insert(paper);\
+                      }\
+                  }\
+              }\
+              let mut raw_data = normalized;' src/main.rs
           cargo build --release
           cp target/release/arxivfeed ../
       - name: Build rss
