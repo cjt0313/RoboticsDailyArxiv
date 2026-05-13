@@ -29,6 +29,7 @@ jobs:
           git clone --depth 1 https://github.com/NotCraft/ArxivFeed.git
           cd ArxivFeed
           sed -i 's|http://export.arxiv.org|https://export.arxiv.org|g' src/core/query.rs
+          sed -i 's|let date = arxiv.updated;|let date = arxiv.updated.date_naive().and_hms_opt(0, 0, 0).unwrap().and_utc();|g' src/main.rs
           cargo build --release
           cp target/release/arxivfeed ../
       - name: Build rss
