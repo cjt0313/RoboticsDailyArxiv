@@ -1,13 +1,12 @@
 let titles_type = ["Dataset"];
-let titles_model = ["manipulation", "locomotion", "Task Planning", "Motion Planning", "Long-term", "Planning", "Optimization", "quadruped", "legged robot", "Mobile Manipulation"];
-let titles_method = ["physic", "task", "manipulation", "Decision", "Guassian", "differentiable", "simulation", "simulator", "dataset", "Deformable", 
-"geometric", "active", "non prehensile", "grasp", "POMDP", "MDP", "trajectory", "GPT", "LLM", "embodied", "VLM", "VLA", "mobile"];
+let titles_model = ["manipulation", "Task Planning", "Motion Planning", "Long-term", "Planning", "Optimization","Mobile Manipulation", "Human"];
+let titles_method = ["physic", "physical", "task", "manipulation", "differentiable", "simulation", "simulator", "dataset", "Deformable", "active", "non prehensile", "POMDP", "MDP", "VLM", "mobile"];
 let titles =  titles_model + titles_method + titles_type;
 let authors_array = [
     "Yuke Zhu", "Leslie Pack Kaelbling", "Joshua Tenenbaum", "Tomás Lozano-Pérez", "Panpan CAI", "David Hsu",
     "Wenjing Tang", "Xinyu He", "Yongxi Huang", "Yunxiao Xiao",
     "Wolfram Burgard", "Yunzhu Li", "Ken Goldberg", "Guanya Shi", "Lydia E Kavraki", "Zachary Kingston",
-    "Marco Pavone", "Chelsea Finn", "Shuran Song", "Danfei Xu", "Siwei Chen", "Yiqing Xu", "Jiayuan Mao", "Yilun Du",
+    "Marco Pavone", "Chelsea Finn", "Shuran Song", "Danfei Xu", "Siwei Chen", "Yiqing Xu", "Jiayuan Mao", "Yilun Du","Jiajun Wu", "Hanbo Zhang",
     "Marco Hutter", "Xiaolong Wang", "Li Fei-Fei", "Pieter Abbeel", "Abdeslam Boularias", "Michael Posa",
     "Shaojie Shen", "Tong Qin", "Hongyang Li", "Junchi Yan", "Karl Pertsch", "Boris Ivanovic", "Qihang Zhou",
     "Ken Goldenberg", "Deepak Pathek", "Sergey Levine", "Cewu Lu"];
