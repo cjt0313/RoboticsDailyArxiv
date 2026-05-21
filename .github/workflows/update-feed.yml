@@ -9,7 +9,8 @@ on:
     # Adjust refresh schedule here. By default, it runs once per day.
     # Syntax reference: https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule
     # Recommended tool: https://crontab.guru/
-    - cron: "0 */12 * * *"
+    - cron: "17 8 * * *"
+    - cron: "47 20 * * *"
 
 jobs:
   build:
@@ -46,151 +47,8 @@ jobs:
           # Add delay between API requests to avoid rate limiting
           sed -i '/let arxivs = fetch_arxivs(query, &client).await?;/a\
               tokio::time::sleep(std::time::Duration::from_secs(5)).await;' src/main.rs
-          # Add retry logic for arxiv API rate limiting
-          cat > src/core/fetch.rs << 'PATCH'
-use super::structs::{Arxiv, ArxivQuery};
-use crate::{ArxivCollection, Config};
-use anyhow::Result;
-use reqwest::{Client, IntoUrl, StatusCode};
-use serde::de::DeserializeOwned;
-use std::fs;
-use std::fs::File;
-use std::path::Path;
-use tracing::{info, warn};
-use xml::reader::{EventReader, XmlEvent};
-
-pub async fn feed_cache<T, S>(url: T, client: &Client) -> Result<S>
-    where
-        T: IntoUrl,
-        S: DeserializeOwned,
-{
-    Ok(client.get(url).send().await?.json().await?)
-}
-
-pub async fn from_cache(url: &Option<String>, client: &Client) -> ArxivCollection {
-    if let Some(cache_url) = url {
-        info!("Feeding rss cache from {}", cache_url);
-        match feed_cache(cache_url, &client).await {
-            Ok(rss) => {
-                info!("Feed rss cache Successfully!");
-                rss
-            }
-            Err(err) => {
-                warn!("Failed: {}!", err.to_string());
-                Default::default()
-            }
-        }
-    } else {
-        Default::default()
-    }
-}
-
-pub fn dump_cache(cache_data: &ArxivCollection, config: &Config) -> Result<()> {
-    fs::create_dir_all(&config.target_dir)?;
-    let cache_path = Path::new(&config.target_dir).join("cache.json");
-
-    info!("Dumping Cache: {}", cache_path.to_string_lossy());
-    let mut f = File::create(cache_path)?;
-    serde_json::to_writer(&mut f, &cache_data)?;
-    Ok(())
-}
-
-pub async fn fetch_arxivs(query: ArxivQuery, client: &Client) -> Result<Vec<Arxiv>> {
-    let url = query.to_url();
-    let max_retries: u32 = 5;
-    for attempt in 0..max_retries {
-        let resp = client.get(&url).send().await?;
-        if resp.status() == StatusCode::OK {
-            let body = resp.text().await?;
-            if body.contains("<html") || body.contains("Rate exceeded") {
-                warn!("Rate limited (attempt {}/{}), waiting 30s...", attempt + 1, max_retries);
-                tokio::time::sleep(std::time::Duration::from_secs(30)).await;
-                continue;
-            }
-            return parse_data(body);
-        } else {
-            warn!("HTTP {} (attempt {}/{}), waiting 30s...", resp.status(), attempt + 1, max_retries);
-            tokio::time::sleep(std::time::Duration::from_secs(30)).await;
-        }
-    }
-    anyhow::bail!("Failed to fetch arxiv data after {} retries", max_retries)
-}
-
-fn parse_data(body: String) -> Result<Vec<Arxiv>> {
-    let mut parser = EventReader::from_str(&body);
-    let mut arxiv = Arxiv::new();
-    let mut arxivs = Vec::new();
-
-    'outer: loop {
-        match parser.next()? {
-            XmlEvent::StartElement {
-                name, attributes, ..
-            } => match &name.local_name[..] {
-                "entry" => {
-                    arxiv = Arxiv::new();
-                }
-                "id" => {
-                    if let XmlEvent::Characters(id) = parser.next()? {
-                        arxiv.id = id;
-                    }
-                }
-                "updated" => {
-                    if let XmlEvent::Characters(updated) = parser.next()? {
-                        arxiv.updated = updated.parse()?
-                    }
-                }
-                "published" => {
-                    if let XmlEvent::Characters(published) = parser.next()? {
-                        arxiv.published = published.parse()?
-                    }
-                }
-                "title" => {
-                    if let XmlEvent::Characters(title) = parser.next()? {
-                        arxiv.title = title
-                    }
-                }
-                "summary" => {
-                    if let XmlEvent::Characters(summary) = parser.next()? {
-                        arxiv.summary = summary
-                    }
-                }
-                "author" => {
-                    parser.next()?;
-                    parser.next()?;
-                    if let XmlEvent::Characters(author) = parser.next()? {
-                        arxiv.authors.push(author);
-                    }
-                }
-                "link" => {
-                    if attributes[0].value == "pdf" {
-                        arxiv.pdf_url = format!(
-                            "{}.pdf",
-                            attributes[1].value.replacen("http", "https", 1).clone()
-                        );
-                    }
-                }
-                "comment" => {
-                    if let XmlEvent::Characters(comment) = parser.next()? {
-                        arxiv.comment = Some(comment);
-                    }
-                }
-                _ => (),
-            },
-            XmlEvent::EndElement { name } => match &name.local_name[..] {
-                "entry" => {
-                    arxivs.push(arxiv.clone());
-                }
-                "feed" => {
-                    break 'outer;
-                }
-                _ => (),
-            },
-            _ => (),
-        }
-    }
-    Ok(arxivs)
-}
-PATCH
+          # Replace fetch.rs with patched version that includes retry logic
+          cp ../patches/fetch.rs src/core/fetch.rs
           cargo build --release
           cp target/release/arxivfeed ../
       - name: Build rss
