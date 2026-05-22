@@ -47,20 +47,22 @@ pub fn dump_cache(cache_data: &ArxivCollection, config: &Config) -> Result<()> {
 
 pub async fn fetch_arxivs(query: ArxivQuery, client: &Client) -> Result<Vec<Arxiv>> {
     let url = query.to_url();
-    let max_retries: u32 = 5;
+    let max_retries: u32 = 10;
     for attempt in 0..max_retries {
         let resp = client.get(&url).send().await?;
         if resp.status() == StatusCode::OK {
             let body = resp.text().await?;
             if body.contains("<html") || body.contains("Rate exceeded") {
-                warn!("Rate limited (attempt {}/{}), waiting 30s...", attempt + 1, max_retries);
-                tokio::time::sleep(std::time::Duration::from_secs(30)).await;
+                let delay = 60 + attempt * 30;
+                warn!("Rate limited (attempt {}/{}), waiting {}s...", attempt + 1, max_retries, delay);
+                tokio::time::sleep(std::time::Duration::from_secs(delay.into())).await;
                 continue;
             }
             return parse_data(body);
         } else {
-            warn!("HTTP {} (attempt {}/{}), waiting 30s...", resp.status(), attempt + 1, max_retries);
-            tokio::time::sleep(std::time::Duration::from_secs(30)).await;
+            let delay = 60 + attempt * 30;
+            warn!("HTTP {} (attempt {}/{}), waiting {}s...", resp.status(), attempt + 1, max_retries, delay);
+            tokio::time::sleep(std::time::Duration::from_secs(delay.into())).await;
         }
     }
     anyhow::bail!("Failed to fetch arxiv data after {} retries", max_retries)
