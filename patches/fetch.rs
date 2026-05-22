@@ -9,6 +9,8 @@ use std::path::Path;
 use tracing::{info, warn};
 use xml::reader::{EventReader, XmlEvent};
 
+const PAGE_SIZE: i32 = 50;
+
 pub async fn feed_cache<T, S>(url: T, client: &Client) -> Result<S>
     where
         T: IntoUrl,
@@ -46,6 +48,35 @@ pub fn dump_cache(cache_data: &ArxivCollection, config: &Config) -> Result<()> {
 }
 
 pub async fn fetch_arxivs(query: ArxivQuery, client: &Client) -> Result<Vec<Arxiv>> {
+    let total = query.max_results.unwrap_or(PAGE_SIZE);
+    let mut all_arxivs = Vec::new();
+    let mut offset = query.start.unwrap_or(0);
+
+    while (offset - query.start.unwrap_or(0)) < total {
+        let batch_size = std::cmp::min(PAGE_SIZE, total - (offset - query.start.unwrap_or(0)));
+        let mut page_query = query.clone();
+        page_query.start = Some(offset);
+        page_query.max_results = Some(batch_size);
+
+        info!("  Fetching papers {}-{}...", offset, offset + batch_size);
+        let arxivs = fetch_page(&page_query, client).await?;
+        let count = arxivs.len() as i32;
+        all_arxivs.extend(arxivs);
+
+        if count < batch_size {
+            break;
+        }
+
+        offset += batch_size;
+        if (offset - query.start.unwrap_or(0)) < total {
+            tokio::time::sleep(std::time::Duration::from_secs(10)).await;
+        }
+    }
+
+    Ok(all_arxivs)
+}
+
+async fn fetch_page(query: &ArxivQuery, client: &Client) -> Result<Vec<Arxiv>> {
     let url = query.to_url();
     let max_retries: u32 = 10;
     for attempt in 0..max_retries {
