@@ -44,10 +44,10 @@ jobs:
                   }\
               }\
               let mut raw_data = normalized;' src/main.rs
-          # Add delay between API requests to avoid rate limiting
+          # Add delay between category fetches to be polite
           sed -i '/let arxivs = fetch_arxivs(query, &client).await?;/a\
-              tokio::time::sleep(std::time::Duration::from_secs(60)).await;' src/main.rs
-          # Replace fetch.rs with patched version that includes retry logic
+              tokio::time::sleep(std::time::Duration::from_secs(3)).await;' src/main.rs
+          # Replace fetch.rs with RSS-based version (avoids API rate limiting)
           cp ../patches/fetch.rs src/core/fetch.rs
           cargo build --release
           cp target/release/arxivfeed ../
