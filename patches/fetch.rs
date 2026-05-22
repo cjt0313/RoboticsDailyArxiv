@@ -69,6 +69,8 @@ fn parse_rss(body: String) -> Result<Vec<Arxiv>> {
     let mut description = String::new();
     let mut creators = String::new();
     let mut pub_date = String::new();
+    let mut announce_type = String::new();
+    let mut journal_ref = String::new();
 
     loop {
         match parser.next() {
@@ -81,6 +83,8 @@ fn parse_rss(body: String) -> Result<Vec<Arxiv>> {
                     description.clear();
                     creators.clear();
                     pub_date.clear();
+                    announce_type.clear();
+                    journal_ref.clear();
                 }
                 if in_item {
                     current_tag = tag;
@@ -94,6 +98,8 @@ fn parse_rss(body: String) -> Result<Vec<Arxiv>> {
                         "description" => description.push_str(&text),
                         "creator" => creators.push_str(&text),
                         "pubDate" => pub_date.push_str(&text),
+                        "announce_type" => announce_type.push_str(&text),
+                        "journal_reference" => journal_ref.push_str(&text),
                         _ => {}
                     }
                 }
@@ -133,13 +139,30 @@ fn parse_rss(body: String) -> Result<Vec<Arxiv>> {
                         chrono::Utc::now()
                     };
 
-                    let comment = extract_comment(&description);
+                    let is_revision = announce_type == "replace" || announce_type == "replace-cross";
+                    let published = date;
+                    let updated = if is_revision {
+                        date
+                    } else {
+                        published
+                    };
+                    let published = if is_revision {
+                        date - chrono::Duration::days(1)
+                    } else {
+                        date
+                    };
+
+                    let comment = if !journal_ref.is_empty() {
+                        Some(journal_ref.trim().to_string())
+                    } else {
+                        None
+                    };
 
                     if !title.is_empty() {
                         arxivs.push(Arxiv {
                             id,
-                            updated: date,
-                            published: date,
+                            updated,
+                            published,
                             title: title.trim().to_string(),
                             summary,
                             authors,
@@ -161,14 +184,3 @@ fn parse_rss(body: String) -> Result<Vec<Arxiv>> {
     Ok(arxivs)
 }
 
-fn extract_comment(description: &str) -> Option<String> {
-    if let Some(idx) = description.find("Comment:") {
-        let after = &description[idx + 8..];
-        let end = after.find('\n').unwrap_or(after.len());
-        let comment = after[..end].trim().to_string();
-        if !comment.is_empty() {
-            return Some(comment);
-        }
-    }
-    None
-}
