@@ -69,7 +69,7 @@ pub async fn fetch_arxivs(query: ArxivQuery, client: &Client) -> Result<Vec<Arxi
 
         offset += batch_size;
         if (offset - query.start.unwrap_or(0)) < total {
-            tokio::time::sleep(std::time::Duration::from_secs(10)).await;
+            tokio::time::sleep(std::time::Duration::from_secs(60)).await;
         }
     }
 
@@ -80,7 +80,9 @@ async fn fetch_page(query: &ArxivQuery, client: &Client) -> Result<Vec<Arxiv>> {
     let url = query.to_url();
     let max_retries: u32 = 10;
     for attempt in 0..max_retries {
-        let resp = client.get(&url).send().await?;
+        let resp = client.get(&url)
+            .header("User-Agent", "RoboticsDailyArxiv/1.0 (https://github.com/cjt0313/RoboticsDailyArxiv)")
+            .send().await?;
         if resp.status() == StatusCode::OK {
             let body = resp.text().await?;
             if body.contains("<html") || body.contains("Rate exceeded") {
