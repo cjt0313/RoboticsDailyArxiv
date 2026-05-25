@@ -47,6 +47,8 @@ jobs:
           # Add delay between category fetches to be polite
           sed -i '/let arxivs = fetch_arxivs(query, &client).await?;/a\
               tokio::time::sleep(std::time::Duration::from_secs(3)).await;' src/main.rs
+          # Fix rhai ImmutableString import (removed from plugin prelude in newer rhai versions)
+          sed -i '3a use rhai::ImmutableString;' src/v1/rhai_ext.rs
           # Replace fetch.rs with RSS-based version (avoids API rate limiting)
           cp ../patches/fetch.rs src/core/fetch.rs
           cargo build --release
